@@ -1,0 +1,18 @@
+<ion-view title="Messages">
+  <ion-content>
+  	<button class="button button-positive" ng-click="newMessage()">
+	  New
+	</button>
+	<button class="button button-assertive" ng-click="toggleShowDelete()">
+	  Show Delete
+	</button>
+    <ion-list show-delete="showDelete">
+      <ion-item ng-repeat="message in messages track by $index" type="item-text-wrap" href="#/tab/messages/{{message._id}}">
+        {{message.title}}
+        <ion-delete-button class="ion-minus-circled"
+                       ng-click="deleteMessage(message._id)">
+    	</ion-delete-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

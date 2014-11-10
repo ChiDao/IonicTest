@@ -1,0 +1,15 @@
+<ion-view title="Dashboard">
+  <ion-content class="padding">
+    <div class="list">
+      <div class="item my-item" 
+      	  collection-repeat="item in items"
+	      collection-item-width="'100%'"
+	      collection-item-height="60"
+	      ng-style="{height: 60}"
+	      type="item-text-wrap"
+	      post-repeat-directive>
+        {{item}}
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
