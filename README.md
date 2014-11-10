@@ -1,29 +1,27 @@
 IonicTest
 =========
 
-CordovaÃüÁîĞĞ·½Ê½
-1¡¢ionic start restful_client blank
-2¡¢git»ñÈ¡
-3¡¢cd project_name
-   cordova platform add android
-4¡¢¸ù¾İrestful·şÎñ¶ËipµØÖ·£¬ĞŞ¸Äwww->js->server.js
-5¡¢cordova run android
+Cordovaå‘½ä»¤è¡Œæ–¹å¼<br/>
+1ã€gitè·å–<br/>
+2ã€cd restful_client<br/>
+   cordova platform add android<br/>
+3ã€æ ¹æ®restfulæœåŠ¡ç«¯ipåœ°å€ï¼Œä¿®æ”¹www->js->server.js<br/>
+4ã€cordova build android<br/>
+5ã€cordova run android<br/>
 
-ADT·½Ê½
-1¡¢ionic start restful_client blank
-2¡¢git»ñÈ¡
-3¡¢cd project_name
-   cordova platform add android
-4¡¢Ê¹ÓÃadtµ¼ÈëÄ¿Â¼ÏÂµÄÁ½ÏîÄ¿£¬×¢ÒâÈç¹ûÖ®Ç°ÒÑ¾­µ¼Èë¹ıCordovaµÄÀà¿â£¬´Ë´Î²»µ¼Èë²¢ÔÚµ¼ÈëºóĞŞ¸ÄÀà¿âµÄÉèÖÃ
-5¡¢¸ù¾İrestful·şÎñ¶ËipµØÖ·£¬ĞŞ¸Äassets->www->js->server.js
-6¡¢ÔËĞĞ
+ADTæ–¹å¼<br/>
+1ã€gitè·å–<br/>
+2ã€cd restful_client<br/>
+   cordova platform add android<br/>
+3ã€ä½¿ç”¨adtå¯¼å…¥ç›®å½•ä¸‹çš„ä¸¤é¡¹ç›®ï¼Œæ³¨æ„å¦‚æœä¹‹å‰å·²ç»å¯¼å…¥è¿‡Cordovaçš„ç±»åº“ï¼Œæ­¤æ¬¡ä¸å¯¼å…¥å¹¶åœ¨å¯¼å…¥åä¿®æ”¹ç±»åº“çš„è®¾ç½®<br/>
+4ã€æ ¹æ®restfulæœåŠ¡ç«¯ipåœ°å€ï¼Œä¿®æ”¹assets->www->js->server.js<br/>
+5ã€è¿è¡Œ<br/>
 
-×ÛºÏ·½Ê½
-1¡¢ionic start restful_client blank
-2¡¢git»ñÈ¡
-3¡¢cd project_name
-   cordova platform add android
-4¡¢¸ù¾İrestful·şÎñ¶ËipµØÖ·£¬ĞŞ¸Äwww->js->server.js
-5¡¢cordova build android
-6¡¢Ê¹ÓÃadtµ¼ÈëÄ¿Â¼ÏÂµÄÁ½ÏîÄ¿£¬×¢ÒâÈç¹ûÖ®Ç°ÒÑ¾­µ¼Èë¹ıCordovaµÄÀà¿â£¬´Ë´Î²»µ¼Èë²¢ÔÚµ¼ÈëºóĞŞ¸ÄÀà¿âµÄÉèÖÃ
-7¡¢ÔËĞĞ
+ç»¼åˆæ–¹å¼<br/>
+1ã€gitè·å–<br/>
+2ã€cd restful_client<br/>
+   cordova platform add android<br/>
+3ã€æ ¹æ®restfulæœåŠ¡ç«¯ipåœ°å€ï¼Œä¿®æ”¹www->js->server.js<br/>
+4ã€cordova build android<br/>
+5ã€ä½¿ç”¨adtå¯¼å…¥ç›®å½•ä¸‹çš„ä¸¤é¡¹ç›®ï¼Œæ³¨æ„å¦‚æœä¹‹å‰å·²ç»å¯¼å…¥è¿‡Cordovaçš„ç±»åº“ï¼Œæ­¤æ¬¡ä¸å¯¼å…¥å¹¶åœ¨å¯¼å…¥åä¿®æ”¹ç±»åº“çš„è®¾ç½®<br/>
+6ã€è¿è¡Œ
