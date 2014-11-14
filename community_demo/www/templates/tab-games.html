@@ -1,0 +1,13 @@
+<ion-view title="Games">
+	<ion-nav-buttons side="right">
+      		<button class="button button-clear button-icon ion-search" ng-click="findGame()"></button>
+    </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="game in games" type="item-text-wrap" href="#/tab/game/{{game.id}}">
+        {{game.name}}
+      </ion-item>
+    </ion-list> 
+  </ion-content> 
+</ion-view>  
+ 

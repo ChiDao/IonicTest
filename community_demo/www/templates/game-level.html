@@ -1,0 +1,10 @@
+<ion-view title="{{game.name}}">   
+  <ion-content has-header="true">
+  <h3>Level list</h3>
+    <ion-list>
+      <ion-item ng-repeat="level in game.level" type="item-text-wrap" href="#/tab/game/{{game.id}}/{{level}}">
+        {{level}}
+      </ion-item>
+    </ion-list> 
+  </ion-content> 
+</ion-view>  
