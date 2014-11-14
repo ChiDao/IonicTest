@@ -23,4 +23,28 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
+})
+.factory('Chapters', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  var chapters = [
+    { id: 0, name: 'chapter a' },
+    { id: 1, name: 'chapter b' },
+    { id: 2, name: 'chapter c' },
+    { id: 3, name: 'chapter d' }
+  ];
+
+  return {
+    all: function() {
+      return chapters;
+    },
+    get: function(chapterId) {
+      // Simple index lookup
+      return chapters[chapterId];
+    }
+  }
 });
+
+
+

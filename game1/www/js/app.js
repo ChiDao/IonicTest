@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $location, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,6 +18,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    
+    window.GetIntent(function(chapter){
+			$location.path('/tab/chapters/' + chapter);
+			$rootScope.$apply();
+		});
   });
 })
 
@@ -44,6 +49,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-dash': {
           templateUrl: 'templates/tab-dash.html',
           controller: 'DashCtrl'
+        }
+      }
+    })
+    
+    .state('tab.chapter-detail', {
+      url: '/chapters/:chapterId',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/chapter-detail.html',
+          controller: 'ChapterDetailCtrl'
         }
       }
     })
