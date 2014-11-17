@@ -14,7 +14,11 @@ angular.module('starter.controllers', [])
   $scope.findGame = function () {
     $scope.modal.show();
   }
-
+    
+  $scope.callGame1 = function(){
+		window.OpenApplication("com.gaeamobile.ionictest.game1", '0');
+	};
+    
   $scope.addGame = function (newGame) {
     $scope.gameName = newGame;
     $scope.level = [];
@@ -38,6 +42,9 @@ angular.module('starter.controllers', [])
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
   $scope.friend = Friends.get($stateParams.friendId);
+  $scope.callGame1Chapter2 = function(){
+		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+	};
 })
 
 .controller('MyCtrl',function($scope, $ionicNavBarDelegate) {    
@@ -47,6 +54,9 @@ angular.module('starter.controllers', [])
     $scope.rank =[1,2,3,4,5,6,7,8,9,10  ];   
     $scope.game = Games.get($stateParams.gameId);
     $scope.gameLevel = $stateParams.level;
+    $scope.callGame1Chapter2 = function(){
+		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+	};
 })
 
 .controller('MyVideoCtrl', function($scope,$ionicModal) {
@@ -83,6 +93,9 @@ angular.module('starter.controllers', [])
 
 .controller('HotVideoCtrl', function($scope) {
     $scope.hot =[1,2,3,4,5,6,7,8,9,10];   
+    $scope.callGame1Chapter2 = function(){
+		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+	};
 })
 
 .controller('MenuCtrl', function($scope, $ionicModal, $timeout) {
