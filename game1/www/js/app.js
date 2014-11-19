@@ -19,10 +19,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
     
-    window.GetIntent(function(chapter){
-			$location.path('/tab/chapters/' + chapter);
-			$rootScope.$apply();
-		});
   });
 })
 
@@ -95,5 +91,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
-});
+})
+
+.controller("MainController", [ '$rootScope', '$location', '$scope', function($rootScope, $location, $scope) {
+    $scope.jumpToChapter = function(url) {
+    	var parsedUrl = purl(url);
+    	var chapter = parsedUrl.param('chapter');
+    	console.log("JumpToChapter:" + chapter + " " + angular.isNumber(chapter));
+    	if (!isNaN(chapter)){
+        	$location.path('/tab/chapters/' + chapter);
+        }
+        else{
+        	$location.path('/tab/dash');
+        }
+        $rootScope.$apply();
+    }
+
+}]);;
+
+function handleOpenURL(url) {
+    var body = document.getElementsByTagName("body")[0];
+    var mainController = angular.element(body).scope();
+    mainController.jumpToChapter(url);
+}
 

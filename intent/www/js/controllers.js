@@ -2,16 +2,16 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {
 	$scope.callGame1 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '0');
+		window.open('gaeaionictestgame1://', '_system');
 	};
 	$scope.callGame2 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game2", '0');
+		window.open('gaeaionictestgame2://', '_system');
 	};
 	$scope.callGame1Chapter2 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
 	$scope.callGame2Chapter3 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game2", '3');
+		window.open('gaeaionictestgame2://?chapter=3', '_system');
 	};
 })
 
