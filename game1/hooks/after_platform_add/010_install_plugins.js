@@ -9,7 +9,8 @@ var pluginlist = [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeaionictestgame1"
 ];
 
 // no need to configure below
@@ -27,4 +28,4 @@ pluginlist.forEach(function(plug) {
     exec("cordova plugins add " + plug, puts);
 });
 
-exec("cordova plugins add https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeaionictestgame1", puts);
+//exec("cordova plugins add ", puts);
