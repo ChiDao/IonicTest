@@ -10,7 +10,7 @@ var pluginlist = [
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
-    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeaionictestdemo"
+    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeaionictestdemo",
 ];
 
 // no need to configure below
