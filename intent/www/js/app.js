@@ -80,5 +80,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
-});
+})
+.controller("MainController", [ '$rootScope', '$location', '$scope', function($rootScope, $location, $scope) {
+    $scope.jumpToChapter = function(url) {
+    	alert("get url:" + url);
+    }
+
+}]);
+
+function handleOpenURL(url) {
+    var body = document.getElementsByTagName("body")[0];
+    var mainController = angular.element(body).scope();
+    mainController.jumpToChapter(url);
+}
 

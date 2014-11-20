@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     	var chapter = parsedUrl.param('chapter');
     	console.log("JumpToChapter:" + chapter + " " + angular.isNumber(chapter));
     	if (!isNaN(chapter)){
-        	$location.path('/tab/chapters/' + chapter);
+        	$location.path('/tab/chapters/' + (parseInt(chapter) - 1));
         }
         else{
         	$location.path('/tab/dash');
