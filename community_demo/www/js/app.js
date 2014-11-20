@@ -114,5 +114,50 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/games');
 
-});
+})
 
+.controller("MainController", [ '$rootScope', '$location', '$scope', '$ionicModal', 'Videos' ,function($rootScope, $location, $scope,$ionicModal,Videos) {
+    $scope.jumpToChapter = function(url) {
+    	var parsedUrl = purl(url);
+    	var Page = parsedUrl.attr('file');
+    	console.log("Page:" + Page);
+    	var gameId = parsedUrl.param('gameId');
+    	var level = parsedUrl.param('level');    	
+    	console.log("JumpToShare:" + gameId);
+    	if(Page=="shareVideo.html"){
+    	    $location.path('/tab/myVideo');
+    	    $scope.videos = Videos.all();
+    	    $ionicModal.fromTemplateUrl('templates/modal.html', {
+                animation: 'slide-in-up',
+                scope: $scope
+              }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show(); 
+              });           
+            $scope.form = {};
+            $scope.addVideo = function () {
+                console.log($scope.form.name);
+                $scope.videos.push({name: $scope.form.name});
+                $scope.modal.hide();
+            };     	  
+            $scope.$on('$destroy', function() {
+                $scope.modal.remove();
+            });  
+    	}else if(Page == "viewVideo.html"){
+    	    if (!isNaN(gameId) && !isNaN(level)){
+        	    $location.path('/tab/game/' + gameId +'/' + level);        	    
+            }
+            else{
+        	    $location.path('/tab/games');
+            }
+        }
+        $rootScope.$apply();
+    }
+
+}])
+
+function handleOpenURL(url) {
+    var body = document.getElementsByTagName("body")[0];
+    var mainController = angular.element(body).scope();
+    mainController.jumpToChapter(url);
+};

@@ -7059,9 +7059,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
     opacity: 0.5; }
   .nav-title-slide-ios:not(.no-animation) .button.back-button.ng-hide, .nav-title-slide-ios7:not(.no-animation) .button.back-button.ng-hide {
     opacity: 0;
-    -webkit-transform: translate3d(30%, 0, 0);
-    -moz-transform: translate3d(30%, 0, 0);
-    transform: translate3d(30%, 0, 0); }
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0); }
   .nav-title-slide-ios:not(.no-animation) .button.back-button.ng-hide-add, .nav-title-slide-ios:not(.no-animation) .button.back-button.ng-hide-remove, .nav-title-slide-ios7:not(.no-animation) .button.back-button.ng-hide-add, .nav-title-slide-ios7:not(.no-animation) .button.back-button.ng-hide-remove {
     display: block !important; }
   .nav-title-slide-ios:not(.no-animation) .button.back-button.ng-hide-add, .nav-title-slide-ios7:not(.no-animation) .button.back-button.ng-hide-add {
@@ -7080,9 +7080,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   transform: translate3d(30%, 0, 0);
   opacity: 0; }
   .nav-title-slide-ios > .ng-enter.title, .nav-title-slide-ios.ng-enter.title, .nav-title-slide-ios7 > .ng-enter.title, .nav-title-slide-ios7.ng-enter.title {
-    -webkit-transform: translate3d(100%, 0, 0);
-    -moz-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0); }
+    -webkit-transform: translate3d(30%, 0, 0);
+    -moz-transform: translate3d(30%, 0, 0);
+    transform: translate3d(30%, 0, 0); }
 .nav-title-slide-ios > .ng-enter.ng-enter-active, .nav-title-slide-ios.ng-enter.ng-enter-active, .nav-title-slide-ios7 > .ng-enter.ng-enter-active, .nav-title-slide-ios7.ng-enter.ng-enter-active {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -7102,9 +7102,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
   opacity: 1; }
 .nav-title-slide-ios.reverse > .ng-enter, .nav-title-slide-ios.reverse.ng-enter, .nav-title-slide-ios7.reverse > .ng-enter, .nav-title-slide-ios7.reverse.ng-enter {
-  -webkit-transform: translate3d(-30%, 0, 0);
-  -moz-transform: translate3d(-30%, 0, 0);
-  transform: translate3d(-30%, 0, 0);
+  -webkit-transform: translate3d(-25%, 0, 0);
+  -moz-transform: translate3d(-25%, 0, 0);
+  transform: translate3d(-25%, 0, 0);
   opacity: 0; }
 .nav-title-slide-ios.reverse > .ng-enter.ng-enter-active, .nav-title-slide-ios.reverse.ng-enter.ng-enter-active, .nav-title-slide-ios7.reverse > .ng-enter.ng-enter-active, .nav-title-slide-ios7.reverse.ng-enter.ng-enter-active {
   -webkit-transform: translate3d(0, 0, 0);
@@ -7112,9 +7112,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   transform: translate3d(0, 0, 0);
   opacity: 1; }
 .nav-title-slide-ios.reverse > .ng-leave.ng-leave-active, .nav-title-slide-ios.reverse.ng-leave.ng-leave-active, .nav-title-slide-ios7.reverse > .ng-leave.ng-leave-active, .nav-title-slide-ios7.reverse.ng-leave.ng-leave-active {
-  -webkit-transform: translate3d(100%, 0, 0);
-  -moz-transform: translate3d(100%, 0, 0);
-  transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate3d(30%, 0, 0);
+  -moz-transform: translate3d(30%, 0, 0);
+  transform: translate3d(30%, 0, 0);
   opacity: 0; }
 
 /**

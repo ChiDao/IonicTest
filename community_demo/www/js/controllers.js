@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
   }
     
   $scope.callGame1 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '0');
+		window.open('gaeaionictestgame1://', '_system');
 	};
     
   $scope.addGame = function (newGame) {
@@ -43,11 +43,14 @@ angular.module('starter.controllers', [])
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
   $scope.friend = Friends.get($stateParams.friendId);
   $scope.callGame1Chapter2 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
 })
 
-.controller('MyCtrl',function($scope, $ionicNavBarDelegate) {    
+.controller('MyCtrl',function($scope, $ionicNavBarDelegate) { 
+    $scope.getPreviousTitle  = function() {
+        return $ionicNavBarDelegate.getPreviousTitle();
+    };   
 })
 
 .controller('RankVideoCtrl', function($scope,$stateParams,Games) { 
@@ -55,17 +58,12 @@ angular.module('starter.controllers', [])
     $scope.game = Games.get($stateParams.gameId);
     $scope.gameLevel = $stateParams.level;
     $scope.callGame1Chapter2 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
 })
 
-.controller('MyVideoCtrl', function($scope,$ionicModal) {
-    $scope.videos = [
-        {name:'刀塔传奇第1关'},
-        {name:'刀塔传奇第2关'},
-        {name:'刀塔传奇第3关'},
-        {name:'刀塔传奇第4关'},
-            ] 
+.controller('MyVideoCtrl', function($scope,$ionicModal,Videos) {
+    $scope.videos = Videos.all();
     
     $ionicModal.fromTemplateUrl('templates/modal.html', {
     animation: 'slide-in-up',
@@ -94,7 +92,7 @@ angular.module('starter.controllers', [])
 .controller('HotVideoCtrl', function($scope) {
     $scope.hot =[1,2,3,4,5,6,7,8,9,10];   
     $scope.callGame1Chapter2 = function(){
-		window.OpenApplication("com.gaeamobile.ionictest.game1", '2');
+		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
 })
 

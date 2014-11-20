@@ -54,4 +54,22 @@ angular.module('starter.services', [])
     }
   }
 })
+
+.factory('Videos', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  var videos = [
+        {name:'刀塔传奇第1关'},
+        {name:'刀塔传奇第2关'},
+        {name:'刀塔传奇第3关'},
+        {name:'刀塔传奇第4关'},
+            ] 
+  
+  return {
+    all: function() {
+      return videos;
+    }
+  }
+})
 ;
