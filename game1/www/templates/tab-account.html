@@ -1,5 +1,10 @@
 <ion-view title="Account">
-  <ion-content class="padding">
-    <h1>Account</h1>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-icon-right" ng-repeat="game in games" type="item-text-wrap" ng-click="checkInstalled($index)">
+        {{game.name}}
+        <i ng-class="{'icon':true, 'ion-android-playstore':game.installed === 'No', 'ion-android-checkmark':game.installed === 'Yes', 'ion-loading-a':game.installed === 'checking'}"></i>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -10,7 +10,8 @@ var pluginlist = [
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
-    "nl.x-services.plugins.launchmyapp"
+    "nl.x-services.plugins.launchmyapp",
+    "com.ohh2ahh.plugins.appavailability"
 ];
 
 // no need to configure below
