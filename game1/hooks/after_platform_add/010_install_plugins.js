@@ -11,6 +11,7 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
     "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeaionictestgame1",
+    "technology.kulak.cordova.appopen",
     "https://github.com/ohh2ahh/AppAvailability.git"
 ];
 

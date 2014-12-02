@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.gaeamobile.ionictest.game1" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget 
+    id="com.gaeamobile.ionictest.game1" 
+    version="0.0.1" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:gap="http://phonegap.com/ns/1.0" 
+	xmlns:android="http://schemas.android.com/apk/res/android">
   <name>game1</name>
   <description>
         An Ionic Framework and Cordova project.
@@ -16,4 +22,7 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  <gap:config-file platform="android" parent="/manifest">
+     <application android:debuggable="true" />
+  </gap:config-file>
 </widget>

@@ -11,6 +11,7 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
     "nl.x-services.plugins.launchmyapp",
+    "technology.kulak.cordova.appopen",
     "com.ohh2ahh.plugins.appavailability"
 ];
 
