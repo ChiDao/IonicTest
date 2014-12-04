@@ -130,6 +130,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
       }
     })
 
+    .state('tab.findFriends', {
+      url: '/findFriends',
+      views: {
+        'tab-friends': {
+          templateUrl: 'templates/find-friends.html',
+          controller: 'FindFriendsCtrl'
+        }
+      }
+    })
+    
     .state('login', {
       url: "/login",
       templateUrl: "templates/login.html"

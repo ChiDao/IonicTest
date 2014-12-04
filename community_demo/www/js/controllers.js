@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.findFriendsCtrl'])
 
 .controller('GamesCtrl', function($scope,$ionicModal,Games) {
     $scope.games = Games.all();
@@ -36,9 +36,13 @@ angular.module('starter.controllers', [])
    $scope.game = Games.get($stateParams.gameId);
 })
 
-.controller('FriendsCtrl', function($scope,$ionicSideMenuDelegate,Friends,$stateParams) {
-   //$scope.friends = Friends.all();
-    $scope.friends = Friends.get($stateParams.userId);
+.controller('FriendsCtrl', function($scope,$ionicSideMenuDelegate,Friends, $location, $rootScope, $stateParams) {
+    $scope.friends = Friends.all('freedom');
+    //$scope.friends = Friends.get($stateParams.userId);
+
+    $scope.findFriends = function(){
+      $location.path('/tab/findFriends');
+    };
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Users, Videos) {
