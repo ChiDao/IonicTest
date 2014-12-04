@@ -8,11 +8,11 @@
 <ion-content has-header="true" padding="true">
   <ion-list>
   
-  <div class="list card" ng-repeat="video in friend.video">
+  <div class="list card" ng-repeat="video in videos|filter:userId = (userId)">
 
   <div class="item item-avatar">
     <img src="mcfly.jpg">
-    <h2>{{video}}</h2>
+    <h2>{{video.name}}</h2>
     <p>November 05, 2014</p>
   </div>
 

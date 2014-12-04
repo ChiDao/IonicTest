@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl','starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,6 +19,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
+})
+
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.tabs.style("standard").position("bottom");
+  
+  $ionicConfigProvider.views.transition("ios");
+  
+  $ionicConfigProvider.navBar.alignTitle("center").positionPrimaryButtons('left').positionSecondaryButtons('right');
+  
+  $ionicConfigProvider.backButton.previousTitleText('true');
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -43,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'tab-games': {
           templateUrl: 'templates/tab-games.html',
-          controller: 'GamesCtrl'
+          controller: 'AccountCtrl'
         }
       }
     })
@@ -56,18 +66,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.rankVideo', {
+    .state('tab.stage-detail', {
       url: '/game/:gameId/:level',
       views: {
         'tab-games': {
-          templateUrl: 'templates/tab-rankVideo.html',
-          controller: 'RankVideoCtrl'
+          templateUrl: 'templates/stage-detail.html',
+          controller: 'StageDetailCtrl'
+        }
+      }
+    })
+    .state('tab.topic', {
+      url: '/game/:gameId/:level/topics',
+      views: {
+        'tab-games': {
+          templateUrl: 'templates/topic.html',
+          controller: 'TopicCtrl'
         }
       }
     })
 
     .state('tab.friends', {
-      url: '/friends',
+      url: '/:userId/friends',
       views: {
         'tab-friends': {
           templateUrl: 'templates/tab-friends.html',
@@ -109,15 +128,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'HotVideoCtrl'
         }
       }
-    });
+    })
+
+    .state('login', {
+      url: "/login",
+      templateUrl: "templates/login.html"
+    })
+;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/games');
+  $urlRouterProvider.otherwise('/login');
 
 })
 
-.controller("MainController", [ '$rootScope', '$location', '$scope', '$ionicModal', 'Videos' ,function($rootScope, $location, $scope,$ionicModal,Videos) {
-    $scope.jumpToChapter = function(url) {
+.controller("MainController", [ '$rootScope', '$location', '$scope', '$ionicModal', 'Videos', 'Users','$state',function($rootScope, $location, $scope,$ionicModal,Videos,Users,$state) {
+    $scope.login = function(name){
+      var username =name;
+      console.log("login"+username);
+      $scope.user = Users.get(username);
+      if($scope.user._id != ''){
+          $state.go("tab.games");
+      }
+    }   
+
+
+     $scope.jumpToChapter = function(url) {
     	var parsedUrl = purl(url);
     	var Page = parsedUrl.attr('file');
     	console.log("Page:" + Page);

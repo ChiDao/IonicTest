@@ -1,0 +1,28 @@
+
+<ion-view title="topic">
+  <ion-content has-header="true">
+  <h3>topic list</h3>
+  <ion-list>
+  <ion-item ng-repeat="topic in topics">
+    {{game.name}} stage {{gameLevel}} toptic {{topic}}
+    <div class="item item-divider  tabs tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="icon ion-thumbsup"></i>
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-chatbox"></i>
+      Comment
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-share"></i>
+      Share
+    </a>
+    <a class="tab-item" ng-click="callGame1Chapter2()">
+      <i class="icon ion-game-controller-b"></i>
+      Play
+    </a>
+  </div>
+  </ion-item>
+</ion-list>
+</ion-content>
+</ion-view>

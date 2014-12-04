@@ -1,14 +1,13 @@
 <ion-view title="Games">
-	<ion-nav-buttons side="right">
-      		<button class="button button-clear button-icon ion-search" ng-click="findGame()"></button>
-    </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="game in games" type="item-text-wrap" href="#/tab/game/{{game.id}}">
+      <ion-item class="item-icon-right" ng-repeat="game in games" type="item-text-wrap" ng-click="checkInstalled($index)">
         {{game.name}}
-        <ion-option-button class="button-positive" ng-click="callGame1()">Enter game</ion-option-button>
+        <i ng-class="{'icon':true, 'ion-android-playstore':game.installed === 'No', 'ion-android-checkmark':game.installed === 'Yes', 'ion-loading-a':game.installed === 'checking'}"></i>
       </ion-item>
-    </ion-list> 
-  </ion-content> 
+    </ion-list>
+  </ion-content>
 </ion-view>  
+  
+  
   

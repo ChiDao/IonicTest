@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('GamesCtrl', function($scope,$ionicModal,Games) {
     $scope.games = Games.all();
-    $scope.NewGames = Games.other();
+    $scope.NewGames = Games.all();
     
     $ionicModal.fromTemplateUrl('templates/newGame.html', {
     animation: 'slide-in-up',
@@ -33,15 +33,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('GameLevelCtrl', function($scope,$stateParams,Games) {
-    $scope.game = Games.get($stateParams.gameId);
+   $scope.game = Games.get($stateParams.gameId);
 })
 
-.controller('FriendsCtrl', function($scope,$ionicSideMenuDelegate,Friends) {
-  $scope.friends = Friends.all();
+.controller('FriendsCtrl', function($scope,$ionicSideMenuDelegate,Friends,$stateParams) {
+   //$scope.friends = Friends.all();
+    $scope.friends = Friends.get($stateParams.userId);
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
+.controller('FriendDetailCtrl', function($scope, $stateParams, Users, Videos) {
+  //$scope.friend = Friends.get($stateParams.friendId);
+  $scope.videos = Videos.all();
+  $scope.userId = $stateParams.friendId;
+  $scope.friend = Users.getById($scope.userId);
   $scope.callGame1Chapter2 = function(){
 		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
@@ -52,6 +56,8 @@ angular.module('starter.controllers', [])
         return $ionicNavBarDelegate.getPreviousTitle();
     };   
 })
+.controller('StageDetailCtrl',function($scope) {   
+})
 
 .controller('RankVideoCtrl', function($scope,$stateParams,Games) { 
     $scope.rank =[1,2,3,4,5,6,7,8,9,10  ];   
@@ -60,6 +66,16 @@ angular.module('starter.controllers', [])
     $scope.callGame1Chapter2 = function(){
 		window.open('gaeaionictestgame1://?chapter=2', '_system');
 	};
+})
+
+.controller('TopicCtrl', function($scope,$stateParams,Games) { 
+    $scope.topics =[1,2,3,4,5,6,7,8,9,10  ];   
+    console.log("game:"+$stateParams.gameId);
+    $scope.game = Games.get($stateParams.gameId);
+    $scope.gameLevel = $stateParams.level;
+    $scope.callGame1Chapter2 = function(){
+    window.open('gaeaionictestgame1://?chapter=2', '_system');
+  };
 })
 
 .controller('MyVideoCtrl', function($scope,$ionicModal,Videos) {
@@ -78,9 +94,10 @@ angular.module('starter.controllers', [])
 
   $scope.form = {};
 
-  $scope.addVideo = function () {
+  $scope.addVideo = function (userId) {
     console.log($scope.form.name);
-    $scope.videos.push({name: $scope.form.name});
+    console.log(userId);
+    Videos.new(userId,$scope.form.name);
     $scope.modal.hide();
   };
 

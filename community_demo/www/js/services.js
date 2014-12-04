@@ -1,17 +1,180 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngResource'])
 
 /**
  * A simple example service that returns some data.
  */
+
+.factory('Users', function($resource) {
+	var Users = $resource('http://192.168.1.235:9000/api/users/:userId', {userId:'@id'});
+	var users; 
+	Users.query({})
+		.$promise.then(function(getUsers){
+			users = getUsers;
+		}); 
+	    
+	return {
+		all: function(){ 
+			return users;
+		},
+		refresh: function(){
+			users = Users.query({}); 
+		},
+		get: function(userName){
+			for (var index in users){
+				if (users[index].name == userName){
+					return users[index];
+				} 
+			}
+		},
+		getById: function(userId){
+			for (var index in users){
+				console.log("BBB" + userId);
+				if (users[index]._id == userId){
+						console.log(users[index].name);
+					return users[index];
+				} 
+			}
+		},
+		delete: function(userId){
+			Users.delete({userId:userId})
+				.$promise.then(function(){
+					for (var index in users){
+						if (users[index]._id == userId){
+							users.splice(index, 1);
+						}
+					}
+				});
+		}
+	};
+})
+
+.factory('Games', function($resource) {
+	var Games = $resource('http://192.168.1.235:9000/api/games/:gameId', {gameId:'@id'});
+	var games;
+	Games.query({})
+		.$promise.then(function(getGames){
+			games = getGames;
+		});	
+	
+	return {
+		all: function(){	
+	//		games = Games.query({});	
+      		return games;
+    	},
+		refresh: function(){
+			games = Games.query({});
+		},
+		get: function(gid){	
+			games = Games.get({gameId:gid});	
+			return games;
+		},
+		new: function(gameName){
+			Games.save({"name": gameName})
+				.$promise.then(function(newGame){
+					games.push(newGame);
+				});
+		},
+		delete: function(gameId){
+			Games.delete({gameId:gameId})
+				.$promise.then(function(){
+					for (var index in games){
+						if (games[index]._id == gameId){
+							games.splice(index, 1);
+						}
+					}
+				});
+		}
+	};
+})
+.factory('Stages', function($resource) {
+	var Stages = $resource('http://192.168.1.235:9000/api/stages/:stageId', {stageId:'@id'});
+	var stages;
+	Stages.query({})
+		.$promise.then(function(getStages){
+			stages = getStages;
+		});
+	
+	return {
+		all: function(){
+			return stages;
+		},
+		refresh: function(){
+			stages = Stages.query({});
+		},
+		get: function(stageId){
+			for (var index in stages){
+				if (stages[index]._id = stageId){
+					return stages[index];
+				}
+			}
+		},
+		new: function(stageName){
+			Stages.save({"name": stageName})
+				.$promise.then(function(newStage){
+					stages.push(newStage);
+				});
+		},
+		delete: function(stageId){
+			Stages.delete({stageId:stageId})
+				.$promise.then(function(){
+					for (var index in stages){
+						if (stages[index]._id == stageId){
+							stages.splice(index, 1);
+						}
+					}
+				});
+		}
+	};
+})
+
+.factory('Friends', function($resource) {
+	var Friends = $resource('http://192.168.1.235:9000/api/friends/:userId', {userId:'@userId'});
+	var myfriends = [];
+	var friends ;
+	Friends.query({}).$promise.then(function(getFriends){
+			friends = getFriends;
+		});
+
+	return {
+		all: function(){
+			return friends;
+		},
+		refresh: function(){
+			friends = Friends.query({});
+		},
+		get: function(myID){
+			myfriends = Friends.query({'userId':myID});
+			return myfriends;
+		},
+		new: function(friendName){
+			Friends.save({"name": friendName})
+				.$promise.then(function(newFriend){
+					friends.push(newFriend);
+				});
+		},
+		delete: function(friendId){
+			Friends.delete({friendId:friendId})
+				.$promise.then(function(){
+					for (var index in friends){
+						if (friends[index]._id == friendId){
+							friends.splice(index, 1);
+						}
+					}
+				});
+		}
+	};
+})
+
+/*
 .factory('Friends', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
   var friends = [
-    { id: 0, name: 'Scruff McGruff','video':['µ¶Ëş´«ÆæµÚ3¹Øvideo','µ¶Ëş´«ÆæµÚ8¹Øvideo','È«ÃñÆæ¼£µÚ4¹Øvideo'] },
-    { id: 1, name: 'G.I. Joe','video':['ÌìÁú°Ë²¿3DµÚ3¹Øvideo','ÌìÁú°Ë²¿3DµÚ8¹Øvideo','È«ÃñÆæ¼£µÚ4¹Øvideo','ÌìÁú°Ë²¿3DµÚ9¹Øvideo'] },
-    { id: 2, name: 'Miss Frizzle','video':['È¥°ÉÆ¤¿¨ÇğµÚ3¹Øvideo','È¥°ÉÆ¤¿¨ÇğµÚ8¹Øvideo','È¥°ÉÆ¤¿¨ÇğµÚ4¹Øvideo','È¥°ÉÆ¤¿¨ÇğµÚ11¹Øvideo'] },
-    { id: 3, name: 'Ash Ketchum','video':['½Ú×à´óÊ¦µÚ3¹Øvideo','½Ú×à´óÊ¦µÚ8¹Øvideo','ÌìÌì°®Ïû³ıµÚ4¹Øvideo','ÌìÌì°®Ïû³ıµÚ12¹Øvideo','ÌìÌì°®Ïû³ıµÚ23¹Øvideo','ÌìÌì°®Ïû³ıµÚ33¹Øvideo'] }
+    { id: 0, name: 'Scruff McGruff','video':['åˆ€å¡”ä¼ å¥‡ç¬¬3å…³video','åˆ€å¡”ä¼ å¥‡ç¬¬8å…³video','å…¨æ°‘å¥‡è¿¹ç¬¬4å…³video'] },
+    { id: 1, name: 'G.I. Joe','video':['å¤©é¾™å…«éƒ¨3Dç¬¬3å…³video','å¤©é¾™å…«éƒ¨3Dç¬¬8å…³video','å…¨æ°‘å¥‡è¿¹ç¬¬4å…³video','å¤©é¾™å…«éƒ¨3Dç¬¬9å…³video'] },
+    { id: 2, name: 'Miss Frizzle','video':['å»å§çš®å¡ä¸˜ç¬¬3å…³video','å»å§çš®å¡ä¸˜ç¬¬8å…³video','å»å§çš®å¡ä¸˜ç¬¬4å…³video','å»å§çš®å¡ä¸˜ç¬¬11å…³video'] },
+    { id: 3, name: 'Ash Ketchum','video':['èŠ‚å¥å¤§å¸ˆç¬¬3å…³video','èŠ‚å¥å¤§å¸ˆç¬¬8å…³video','å¤©å¤©çˆ±æ¶ˆé™¤ç¬¬4å…³video','å¤©å¤©çˆ±æ¶ˆé™¤ç¬¬12å…³video','å¤©å¤©çˆ±æ¶ˆé™¤ç¬¬23å…³video','å¤©å¤©çˆ±æ¶ˆé™¤ç¬¬33å…³video'] }
   ];
 
   return {
@@ -24,22 +187,23 @@ angular.module('starter.services', [])
     }
   }
 })
+
 .factory('Games', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
   var games = [
-    {id: 0, name: 'µ¶Ëş´«Ææ' , 'level': [1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
-    {id: 1, name: 'È«ÃñÆæ¼£' , 'level':[1,2,3]},
-    {id: 2, name: 'ÌìÁú°Ë²¿3D' ,'level':[1,2,3,4,5]},
-    {id: 3, name: 'È¥°ÉÆ¤¿¨Çğ' ,'level':[1,2,3,4]}
+    {id: 0, name: 'åˆ€å¡”ä¼ å¥‡' , 'level': [1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
+    {id: 1, name: 'å…¨æ°‘å¥‡è¿¹' , 'level':[1,2,3]},
+    {id: 2, name: 'å¤©é¾™å…«éƒ¨3D' ,'level':[1,2,3,4,5]},
+    {id: 3, name: 'å»å§çš®å¡ä¸˜' ,'level':[1,2,3,4]}
   ];
   
    var newGames = [
-    {id: 0, name: 'ÎÒÊÇËÀÉñ' },
-    {id: 1, name: 'ÌìÌì·É³µ' },
-    {id: 2, name: '½Ú×à´óÊ¦' },
-    {id: 3, name: 'ÌìÌì°®Ïû³ı' },
+    {id: 0, name: 'æˆ‘æ˜¯æ­»ç¥' },
+    {id: 1, name: 'å¤©å¤©é£è½¦' },
+    {id: 2, name: 'èŠ‚å¥å¤§å¸ˆ' },
+    {id: 3, name: 'å¤©å¤©çˆ±æ¶ˆé™¤' },
   ];
 
   return {
@@ -54,22 +218,47 @@ angular.module('starter.services', [])
     }
   }
 })
+*/
 
-.factory('Videos', function() {
-  // Might use a resource here that returns a JSON array
 
-  // Some fake testing data
-  var videos = [
-        {name:'µ¶Ëş´«ÆæµÚ1¹Ø'},
-        {name:'µ¶Ëş´«ÆæµÚ2¹Ø'},
-        {name:'µ¶Ëş´«ÆæµÚ3¹Ø'},
-        {name:'µ¶Ëş´«ÆæµÚ4¹Ø'},
-            ] 
-  
-  return {
-    all: function() {
-      return videos;
-    }
-  }
+.factory('Videos', function($resource) {
+	var Videos = $resource('http://192.168.1.235:9000/api/videos/:videoId', {videoId:'@id'});
+	var videos;
+	Videos.query({})
+		.$promise.then(function(getVideos){
+			videos = getVideos;
+		});
+	
+	return {
+		all: function(){
+			return videos;
+		},
+		refresh: function(){
+			videos = Videos.query({});
+		},
+		get: function(videoId){
+			for (var index in videos){
+				if (videos[index]._id == videoId){
+					return videos[index];
+				}
+			}
+		},
+		new: function(uId,videoName){
+			Videos.save({userId:uId ,name:videoName})
+				.$promise.then(function(newVideo){
+					videos.push(newVideo);
+				});
+		},
+		delete: function(videoId){
+			Videos.delete({videoId:videoId})
+				.$promise.then(function(){
+					for (var index in videos){
+						if (videos[index]._id == videoId){
+							videos.splice(index, 1);
+						}
+					}
+				});
+		}
+	};
 })
 ;

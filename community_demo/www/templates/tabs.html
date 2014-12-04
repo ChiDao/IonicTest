@@ -4,7 +4,10 @@
   navigation history that also transitions its views in and out.
 -->    
 
-    	
+<ion-nav-buttons  side="left">
+	<button class="button button-icon button-clear ion-navicon" $ionicSideMenuDelegate.toggleLeft()></button>
+</ion-nav-buttons> 
+
 <ion-tabs class="tabs-positive tabs-icon-top">
 
 
@@ -13,9 +16,9 @@
     <ion-nav-view name="tab-games"></ion-nav-view>
   </ion-tab>
 
-
+ 
   <!-- Friends Tab -->
-  <ion-tab title="Friends" icon="icon ion-heart" href="#/tab/friends">
+  <ion-tab title="Friends" icon="icon ion-heart" href="#/tab/{{user._id}}/friends">
     <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 

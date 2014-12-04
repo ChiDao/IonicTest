@@ -5,7 +5,7 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-      		<ion-item ng-repeat="game in NewGames" type="item-text-wrap" ng-click="addGame(game.name)">
+      		<ion-item ng-repeat="game in NewGames|filter:islocal='false'" type="item-text-wrap" ng-click="addGame(game.name)">
         		{{game.name}}
       		</ion-item>
     	</ion-list> 

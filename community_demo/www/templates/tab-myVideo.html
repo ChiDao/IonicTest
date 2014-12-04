@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
   <ion-list>
-      <ion-item ng-repeat="video in videos" type="item-text-wrap">
+      <ion-item ng-repeat="video in videos|filter:userId = (user._id)" type="item-text-wrap">
         {{video.name}}
       </ion-item>
 	</ion-list>
