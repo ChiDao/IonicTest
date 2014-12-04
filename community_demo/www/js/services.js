@@ -1,4 +1,4 @@
-angular.module('starter.services', ['ngResource'])
+angular.module('starter.services', ['ngResource', 'starter.services.Friends'])
 
 /**
  * A simple example service that returns some data.
@@ -120,44 +120,6 @@ angular.module('starter.services', ['ngResource'])
 					for (var index in stages){
 						if (stages[index]._id == stageId){
 							stages.splice(index, 1);
-						}
-					}
-				});
-		}
-	};
-})
-
-.factory('Friends', function($resource) {
-	var Friends = $resource('http://192.168.1.235:9000/api/friends/:userId', {userId:'@userId'});
-	var myfriends = [];
-	var friends ;
-	Friends.query({}).$promise.then(function(getFriends){
-			friends = getFriends;
-		});
-
-	return {
-		all: function(){
-			return friends;
-		},
-		refresh: function(){
-			friends = Friends.query({});
-		},
-		get: function(myID){
-			myfriends = Friends.query({'userId':myID});
-			return myfriends;
-		},
-		new: function(friendName){
-			Friends.save({"name": friendName})
-				.$promise.then(function(newFriend){
-					friends.push(newFriend);
-				});
-		},
-		delete: function(friendId){
-			Friends.delete({friendId:friendId})
-				.$promise.then(function(){
-					for (var index in friends){
-						if (friends[index]._id == friendId){
-							friends.splice(index, 1);
 						}
 					}
 				});

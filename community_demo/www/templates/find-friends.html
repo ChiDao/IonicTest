@@ -1,0 +1,13 @@
+<ion-view title="Contract List">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-button-right" ng-repeat="friend in friends" type="item-text-wrap" >
+        {{friend.name}}
+        <button class="button button-positive" ng-click="selectFriend(friend.id)" ng-if="!friend.added">
+        	<i class="icon ion-android-add"></i>
+        </button>
+        <!-- i ng-class="icon ion-android-checkmark" ng-if="!friend.added"></i -->
+      </ion-item>
+    </ion-list> 
+  </ion-content>
+</ion-view>
