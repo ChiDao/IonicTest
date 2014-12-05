@@ -9,7 +9,8 @@ var pluginlist = [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "com.ionic.keyboard",
-    "org.apache.cordova.camera"
+    "org.apache.cordova.camera",
+    "org.apache.cordova.file-transfer"
 ];
 
 // no need to configure below
