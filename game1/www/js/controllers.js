@@ -6,11 +6,17 @@ angular.module('starter.controllers', [])
 
 .controller('ChapterDetailCtrl', function($scope, $stateParams, Chapters) {
   $scope.chapter = Chapters.get($stateParams.chapterId);
-    $scope.viewVedio = function(){
-        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/viewVideo.html?gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
+    $scope.viewTopic = function(){
+        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/viewTopic.html?gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
     };
-    $scope.shareVedio = function(){
-        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/shareVideo.html?vedioId=1111&gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
+    $scope.tocao = function(){
+        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/tucao.html?gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
+    };
+    $scope.show = function(){
+        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/show.html?gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
+    };
+    $scope.askForHelp = function(){
+        window.open('gaeaionictestdemo://gaeamobile.net/IonicTest/community/askForHelp.html?gameId=0&level=' + (parseInt($stateParams.chapterId) + 1), '_system');
     };
 })
 
