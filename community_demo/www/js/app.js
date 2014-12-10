@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl','starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl','starter.services','starter.filter','restangular'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,6 +19,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
       StatusBar.styleDefault();
     }
   });
+})
+
+
+.config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
+
+    // add a response intereceptor
+    RestangularProvider.addResponseInterceptor(function(data, operation) {
+      var extractedData;
+      var json = JSON.stringify(data);
+      console.log("json1:"+json);
+      // .. to look for getList operations
+      if (operation === "getList") {
+        // .. and handle the data and meta 
+       extractedData = data.slice;
+       var json = JSON.stringify(data.slice);
+       console.log("json2:"+json);
+ //       extractedData.meta = data.data.meta;
+      } else {
+        var json = JSON.stringify(data);
+       console.log("json3:"+json);
+        extractedData = data;
+      }
+      return extractedData;
+    });
+
 })
 
 .config(function($ionicConfigProvider) {
@@ -58,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
       }
     })
     .state('tab.game-level', {
-      url: '/game/:gameId',
+      url: '/game/:gameId/:gameName/:gameTag',
       views: {
         'tab-games': {
           templateUrl: 'templates/game-level.html',
@@ -67,7 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
       }
     })
     .state('tab.stage-detail', {
-      url: '/game/:gameId/:level',
+      url: '/game/:gameName/:stage',
       views: {
         'tab-games': {
           templateUrl: 'templates/stage-detail.html',
@@ -76,7 +102,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
       }
     })
     .state('tab.topic', {
-      url: '/game/:gameId/:level/topics',
+      url: '/game/stage/topics/:gameName/:posts',
       views: {
         'tab-games': {
           templateUrl: 'templates/topic.html',
@@ -84,7 +110,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
         }
       }
     })
-
     .state('tab.friends', {
       url: '/:userId/friends',
       views: {
@@ -151,14 +176,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.AccountCtrl'
 
 })
 
-.controller("MainController", [ '$rootScope', '$location', '$scope', '$ionicModal', 'Videos', 'Users','$state',function($rootScope, $location, $scope,$ionicModal,Videos,Users,$state) {
-    $scope.login = function(name){
-      var username =name;
-      console.log("login"+username);
-      $scope.user = Users.get(username);
-      if($scope.user._id != ''){
-          $state.go("tab.games");
-      }
+.controller("MainController", ['$rootScope', '$location', '$scope', '$ionicModal', 'Videos', 'Users','$state','Restangular',function($rootScope, $location, $scope,$ionicModal,Videos,Users,$state,Restangular) {
+    $scope.login = function(tel,name){
+      console.log("login"+name +tel);
+  //    $scope.user = Users.get(username);
+ //     if($scope.user._id != ''){
+         var Login = Restangular.all('login');
+          Login.post({tel:tel,name:name}).then(function(user){
+             var user = user; 
+             $rootScope.game = user.discover;
+             Restangular.oneUrl('me',user.me).get().then(function(userInfo){
+                $rootScope.me = userInfo;
+                
+                $state.go("tab.games");
+             })
+         //    var json = JSON.stringify(user);            
+        });         
+          
+ //     }
     }   
 
 
