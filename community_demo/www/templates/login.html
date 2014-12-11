@@ -10,11 +10,11 @@
           <input type="text" ng-model="loginData.username">
         </label>        
         <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+          <span class="input-label">Tel</span>
+          <input type="password" ng-model="loginData.tel">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" type="submit"  ng-click="login(loginData.username)">Log in</button>
+          <button class="button button-block button-positive" type="submit"  ng-click="login(loginData.tel,loginData.username)">Log in</button>
         </label> 
       </div>
     </form>

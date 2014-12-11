@@ -22,6 +22,7 @@ angular.module('starter.services.Friends', [])
 		]
 	};
 
+	//本地通讯录
 	var contactList = {
 			freedom:{
 				phone:[

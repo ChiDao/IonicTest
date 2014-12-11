@@ -1,6 +1,7 @@
 angular.module('starter.AccountCtrl', [])
 
 .controller('AccountCtrl', function($scope,$q,$state) {
+    /*
     $scope.games = [
         {
             name:'保卫萝卜2',
@@ -38,12 +39,12 @@ angular.module('starter.AccountCtrl', [])
             installed:'checking'
         }
     ];
-
+*/
     //异步检测应用是否存在函数
     function asyncCheck(game){
         var deferred = $q.defer();
         appAvailability.check(
-            game.iosUrl, // URI Scheme
+            game.iosName, // URI Scheme
             function() {  // Success callback
                 deferred.resolve("Yes");
             },
@@ -70,11 +71,12 @@ angular.module('starter.AccountCtrl', [])
     //点击应用列表事件处理
     $scope.checkInstalled = function(key){
         if($scope.games[key].installed === "Yes"){
-            $state.go('tab.game-level',{gameId:$scope.games[key].gameId});
+          //  $state.go('tab.game-level',{gameId:$scope.games[key].gameId});
+            $state.go('tab.game-level',{gameId:$scope.games[key]['_id'],gameName:$scope.games[key]['name'],gameTag:encodeURIComponent($scope.games[key]['tags'])});
            // window.open($scope.games[key].iosUrl, '_system');
         }
         else{
-            window.open($scope.games[key].downloadUrl, '_system');
+            window.open($scope.games[key].iosUrl, '_system');
         }
     }
 });

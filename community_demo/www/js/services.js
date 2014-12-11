@@ -1,8 +1,10 @@
-angular.module('starter.services', ['ngResource', 'starter.services.Friends'])
+angular.module('starter.services', ['ngResource', 'starter.services.Friends','restangular'])
 
 /**
  * A simple example service that returns some data.
  */
+
+
 
 .factory('Users', function($resource) {
 	var Users = $resource('http://192.168.1.235:9000/api/users/:userId', {userId:'@id'});
@@ -47,7 +49,25 @@ angular.module('starter.services', ['ngResource', 'starter.services.Friends'])
 		}
 	};
 })
+.factory('Games', function(Restangular) {
+//	var Games = Restangular.allUrl('Games','http://42.120.45.236:8485/discover?_last');
+	//var allGames = Restangular.allUrl('Games','http://42.120.45.236:8485/discover?_last').getList();
 
+	Restangular.allUrl('Games','http://42.120.45.236:8485/discover?_last').getList().then(function(games){
+      allGames = games;     
+      var json = JSON.stringify(allGames);
+	  console.log("gm"+json);
+    });
+
+	return {
+		all: function(){
+			var json = JSON.stringify(allGames);
+			console.log("gm"+json);
+			return allGames; 
+		}
+	}
+})
+/*
 .factory('Games', function($resource) {
 	var Games = $resource('http://192.168.1.235:9000/api/games/:gameId', {gameId:'@id'});
 	var games;
@@ -86,6 +106,7 @@ angular.module('starter.services', ['ngResource', 'starter.services.Friends'])
 		}
 	};
 })
+*/
 .factory('Stages', function($resource) {
 	var Stages = $resource('http://192.168.1.235:9000/api/stages/:stageId', {stageId:'@id'});
 	var stages;

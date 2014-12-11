@@ -1,6 +1,8 @@
-angular.module('starter.AccountCtrl', [])
+angular.module('starter.AccountCtrl', ['restangular'])
 
-.controller('AccountCtrl', function($scope,$q,$state) {
+
+.controller('AccountCtrl', function($scope,$q,$state,$rootScope,Restangular) {
+    /*
     $scope.games = [
         {
             name:'保卫萝卜2',
@@ -38,12 +40,16 @@ angular.module('starter.AccountCtrl', [])
             installed:'checking'
         }
     ];
+*/
+
+Restangular.allUrl('Games',$rootScope.game + '?_last').getList().then(function(games){
+      $scope.games  = games;  
 
     //异步检测应用是否存在函数
     function asyncCheck(game){
         var deferred = $q.defer();
         appAvailability.check(
-            game.androidPackageName, // URI Scheme
+            game.androidName, // URI Scheme
             function() {  // Success callback
                 deferred.resolve("Yes");
             },
@@ -70,11 +76,12 @@ angular.module('starter.AccountCtrl', [])
     //点击应用列表事件处理
     $scope.checkInstalled = function(key){
         if($scope.games[key].installed === "Yes"){
-            $state.go('tab.game-level',{gameId:$scope.games[key].gameId});
+            $state.go('tab.game-level',{gameId:$scope.games[key]['_id'],gameName:$scope.games[key]['name'],gameTag:encodeURIComponent($scope.games[key]['tags'])});
             // window.OpenApplication($scope.games[key].androidPackageName);
         }
         else{
-            window.open($scope.games[key].downloadUrl, '_system');
+            window.open($scope.games[key].androidUrl, '_system');
         }
     }
+     });
 });
