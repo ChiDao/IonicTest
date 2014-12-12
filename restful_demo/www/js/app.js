@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
+    }RestfulRouteProvider
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
@@ -30,6 +30,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   //   HtmlCreator.allApiStates();
   // }
   // createStates();
+  //RestfulRouteProvider.setApiStatesUrl('aaa');
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -54,10 +55,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-dash': {
           templateProvider: function(HtmlCreator){
             // return HtmlCreator.getHtml('http://42.120.45.236:8485/discover?_last').then(createHtml);
-            return HtmlCreator.getHtml('http://42.120.45.236:8485/discover?_last');
+            return HtmlCreator.getHtml('games');
           },
           controllerProvider: function(HtmlCreator){
-            return HtmlCreator.getController('http://42.120.45.236:8485/discover?_last');
+            return HtmlCreator.getController('games');
           }
         }
       }
