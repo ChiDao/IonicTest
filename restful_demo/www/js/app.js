@@ -53,13 +53,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/dash',
       views: {
         'tab-dash': {
-          templateProvider: function(HtmlCreator){
-            // return HtmlCreator.getHtml('http://42.120.45.236:8485/discover?_last').then(createHtml);
-            return HtmlCreator.getHtml('games');
-          },
-          controllerProvider: function(HtmlCreator){
-            return HtmlCreator.getController('games');
-          }
+          templateUrl: 'templates/dash.html',
+          controller: 'DashCtrl'
         }
       }
     })

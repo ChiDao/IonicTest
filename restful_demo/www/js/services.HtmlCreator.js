@@ -12,6 +12,8 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
       name: 'games',
       api: 'http://42.120.45.236:8485/discover?_last',
       apiType: 'list',
+      stateUrl: '/games',
+      itemUrl: '#/tab/tags/{{data._id}}',
       //Todo: displayType为自定义direcitve
       displayFields: [
         {
@@ -25,6 +27,19 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
         {
           fieldName: '_id',
           displayType: 'h3'
+        }
+      ]
+    },
+    {
+      name: 'tags',
+      api: 'http://42.120.45.236:8485/game-tags/<%= gameId %>?_last',//<%= gameId %>
+      apiType: 'list',
+      stateUrl: '/tags/:gameId',
+      stateUrlParams : ['gameId'],
+      displayFields: [
+        {
+          fieldName: 'title',
+          displayType: 'h1'
         }
       ]
     }
@@ -44,7 +59,7 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
         // console.log(JSON.stringify(this.allApiStates()['tab.games'].views));
         _.forEach(apiConfigs, function(apiConfig){
           $stateProvider.state('tab.' + apiConfig.name, {
-            url: '/' + apiConfig.name,
+            url: apiConfig.stateUrl,
             views: {
               'general-view': {
                 templateProvider: function(HtmlCreator){
@@ -64,8 +79,14 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
           var apiConfig = _.find(apiConfigs, {name: apiConfigName});
           if (!_.isUndefined(apiConfig)){
             if (apiConfig.apiType === 'list'){
-              insertHtml += '<ion-list>' +
-              '<ion-item ng-repeat="data in datas" type="item-text-wrap">';
+              if (_.isUndefined(apiConfig.itemUrl)){
+                insertHtml += '<ion-list>' +
+                '<ion-item ng-repeat="data in datas" type="item-text-wrap">';
+              }
+              else{
+                insertHtml += '<ion-list>' +
+                '<ion-item ng-repeat="data in datas" type="item-text-wrap" href="' + apiConfig.itemUrl + '">';
+              }
               //根据配置显示属性
               _.forEach(apiConfig.displayFields, function(field){
                 insertHtml += displayFieldFunc[field.displayType]('{{data.' + field.fieldName + '}}');
@@ -73,6 +94,7 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
               insertHtml += '</ion-item></ion-list>';
             }
           }
+          console.log('get html' + insertHtml);
           return '<ion-view title="Test">' +
                    ' <ion-content has-header="true" padding="true">' +
                    '    ' + insertHtml + 
@@ -82,9 +104,19 @@ angular.module('services.HtmlCreator', ['restangular','ui.router'])
       },
       getController: function(apiConfigName){
         var apiConfig = _.find(apiConfigs, {name: apiConfigName});
-        var baseFunc = function($scope){
-          Restangular.allUrl('Data', apiConfig.api).getList().then(function(data){
-            //console.log('in controller:' + JSON.stringify(data));
+        var baseFunc = function($scope, $stateParams){
+          var api = '';
+          if (_.isUndefined(apiConfig.stateUrlParams)){
+            api = apiConfig.api;
+          }
+          else{
+            var templateParams = {};
+            templateParams[apiConfig.stateUrlParams] = $stateParams[apiConfig.stateUrlParams];
+            api = _.template(apiConfig.api, templateParams);
+          }
+          // console.log('in controller:');
+          Restangular.allUrl('Data', api).getList().then(function(data){
+            console.log('in controller:' + JSON.stringify(data));
             $scope.datas = data;
           })
         };
